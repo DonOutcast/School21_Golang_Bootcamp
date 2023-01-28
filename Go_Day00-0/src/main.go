@@ -8,17 +8,22 @@ import (
 	"strconv"
 )
 
-func main() {
+func inputNumber(array *[]int) {
 	sc := bufio.NewScanner(os.Stdin)
-	arrayNumbers := make([]int, 0)
-	var median float64
-	var lengthArray int
 	for sc.Scan() {
 		text := sc.Text()
 		temp, _ := strconv.Atoi(text)
-		arrayNumbers = append(arrayNumbers, temp)
+		*array = append(*array, temp)
 	}
+}
+
+func main() {
+	arrayNumbers := make([]int, 0)
+	var median float64
+	var lengthArray int
+	inputNumber(&arrayNumbers)
 	sort.Ints(arrayNumbers)
+	fmt.Println(arrayNumbers)
 	lengthArray = len(arrayNumbers)
 	if lengthArray%2 != 0 {
 		median = float64(arrayNumbers[lengthArray/2])
